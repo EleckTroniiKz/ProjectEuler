@@ -5,21 +5,24 @@ def collatz(n):
     else:
         return 3*n+1
 
-chain = 1
+chainOrder = []
 maxChain = 0
-current = 13
 startNum = 13
-largest = 0
+startingNumberForMaxChain = startNum
+current = 0
 
-while current < 1000000:
+while startNum <= 1000000:
+    chainOrder = []
+    current = startNum
+    chainOrder.append(startNum)
     while current != 1:
         current = collatz(current)
-        chain += 1
-    maxChain = max(maxChain, chain)
-    if maxChain == 131434183:
-        print(startNum)
+        chainOrder.append(current)
+    if maxChain <= len(chainOrder):
+        maxChain = len(chainOrder)
+        startingNumberForMaxChain = startNum
     startNum += 1
     current = startNum
     
-
+print(startingNumberForMaxChain)
 print(maxChain)
